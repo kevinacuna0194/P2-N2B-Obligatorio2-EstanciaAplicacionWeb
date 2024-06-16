@@ -1,0 +1,42 @@
+:root {
+    --primario: #660ef2;
+    --secundario: #ffb100;
+    --fuente: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: var(--fuente);
+}
+
+.header {
+    background-color: var(--primario) !important;
+}
+
+    .header h1 {
+        color: var(--secundario);
+        font-weight: 900;
+    }
+
+    .header p {
+        font-size: 2rem;
+        margin: 0;
+    }
+
+    .header .nav-link {
+        color: var(--secundario);
+        font-weight: 900;
+    }
+
+.heading {
+    font-weight: 900;
+    color: var(--primario);
+}
+
+.heading h1 {
+    font-weight: 900;
+}
+
+.seccion {
+    min-height: 1000px;
+    padding: 2rem;
+}
