@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Registrarse";
+}
+
+<section class="seccion">
+
+    <h1 class="text-center heading mb-5">Registrarse</h1>
+
+    <div class="container-xl">
+
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-6">
+
+                @* Alertas *@
+                @if (ViewBag.Error is not null)
+                {
+                    <p class="alert alert-danger text-center text-uppercase fw-bold mb-4">@ViewBag.Error</p>
+                }
+                else if (ViewBag.Error is not null)
+                {
+                    <p class="alert alert-success text-center text-uppercase fw-bold mb-4">@ViewBag.Exito</p>
+                }
+
+                <form method="post" action="~/Usuarios/Registro">
+
+                    <fieldset>
+
+                        <legend class="mb-3"><i class="bi bi-person-plus-fill"></i> Registrar Peón</legend>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="nombre">Nombre</label>
+                            <input class="form-control" id="nombre" type="nombre" name="nombre" value="@ViewBag.Nombre">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label for="email">Email</label>
+                            <input class="form-control" id="email" type="email" name="email" value="@ViewBag.Email">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-control" id="password" type="password" name="password">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="residente">¿Es Residente?</label>
+                            <select class="form-select" id="residente" name="residente">
+                                <option value="" selected>--Seleccione--</option>
+                                <option value="true">Si</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        
+                    </fieldset>
+
+                    <div class="d-flex justify-content-end py-3">
+
+                        <input type="submit" class="btn btn-primary" value="Enviar">
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+

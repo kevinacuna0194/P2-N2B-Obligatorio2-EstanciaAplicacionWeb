@@ -5,7 +5,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>@ViewData["Title"] - WebApplication1</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/app.css" />
@@ -18,7 +21,7 @@
 
         @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"></nav> *@
 
-        <div class="container-fluid header">
+        <div class="container-fluid header fs-5">
 
             @* <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApplication1</a> *@
 
@@ -29,7 +32,7 @@
 
             @* <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"></div> *@
 
-            <ul class="nav flex-column flex-md-row justify-content-evenly py-4 mb-5">
+            <ul class="nav flex-column flex-md-row justify-content-end py-4 mb-3">
 
                 <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -38,6 +41,23 @@
                 @* <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 </li> *@ @* Enlace *@
+
+                @if (Context.Session.GetString("TipoUsuario") is not null)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="CerrarSesion">Cerrar Sesión</a>
+                    </li> @* Enlace *@
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Login">Login</a>
+                    </li> @* Enlace *@
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Registrarse">Registrarse</a>
+                    </li> @* Enlace *@
+                }
 
             </ul> @* Navegación *@
 

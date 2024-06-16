@@ -73,7 +73,7 @@ namespace ClassLibrary
             {
                 if (potrero is null) throw new ArgumentNullException("Object Null. GanaciaVentaPotrero(Potrero potrero)");
 
-                foreach(Animal animal in potrero.Animales)
+                foreach (Animal animal in potrero.Animales)
                 {
                     if (animal.TipoAnimal() == "Ovino")
                     {
@@ -181,6 +181,26 @@ namespace ClassLibrary
 
         #region Métodos para Buscar Información
         /** Métodos para Buscar Información **/
+        public Empleado ObtenerEmpleadoPorEmailYPassword(string email, string password)
+        {
+            Empleado employee = null;
+            int index = 0;
+
+            while (index < _empleados.Count && employee is null)
+            {
+                Empleado empleado = _empleados[index];
+
+                if (empleado.Email == email && empleado.Password == password)
+                {
+                    employee = empleado;
+                }
+
+                index++;
+            }
+
+            return employee;
+        }
+
         public void ListarPotrerosHectareasCapacidadMaxima(double hectareas, int numero)
         {
             if (hectareas <= 0 || numero <= 0) throw new ArgumentOutOfRangeException("Parámetros incorrectos. ListarPotrerosHectareasCapacidadMaxima(double hectareas, int numero) \n");
@@ -862,23 +882,18 @@ namespace ClassLibrary
 
         public void AltaEmpleado(Empleado empleado)
         {
-            try
-            {
-                if (empleado is null) throw new ArgumentNullException("Object Null AltaEmpleado(Empleado empleado) \n");
-                empleado.Validar();
-                if (_empleados.Contains(empleado)) throw new ArgumentException("Capataz ya Existe en Sistema\\List<Empleado> _empleados \n");
-                _empleados.Add(empleado);
-            }
-            catch (Exception ex)
-            {
-                Error(ex.Message);
-            }
+            if (empleado is null) throw new Exception("Object Null AltaEmpleado(Empleado empleado) \n");
+            empleado.Validar();
+
+            if (_empleados.Contains(empleado)) throw new Exception("Empleado Ya Existe");
+
+            _empleados.Add(empleado);
         }
 
         public void PrecargarEmpleado()
         {
             /** Peones **/
-            AltaEmpleado(new Peon("peon1@email.com", "password1", "Juan", new DateTime(2022, 1, 1), true));
+            AltaEmpleado(new Peon("peon1@email.com", "12345", "Juan", new DateTime(2022, 1, 1), true));
             AltaEmpleado(new Peon("peon2@email.com", "password2", "María", new DateTime(2022, 1, 2), false));
             AltaEmpleado(new Peon("peon3@email.com", "password3", "Carlos", new DateTime(2022, 1, 3), true));
             AltaEmpleado(new Peon("peon4@email.com", "password4", "Ana", new DateTime(2022, 1, 4), false));
@@ -890,7 +905,7 @@ namespace ClassLibrary
             AltaEmpleado(new Peon("peon10@email.com", "password10", "Laura", new DateTime(2022, 1, 10), false));
 
             /** Capataces **/
-            AltaEmpleado(new Capataz("capataz1@email.com", "password1", "Juan", new DateTime(2022, 1, 1), 10));
+            AltaEmpleado(new Capataz("capataz1@email.com", "12345", "Carlos", new DateTime(2022, 1, 1), 10));
             AltaEmpleado(new Capataz("capataz2@email.com", "password2", "María", new DateTime(2022, 1, 2), 8));
         }
         #endregion #region Métodos para Agregar o Modificar Información

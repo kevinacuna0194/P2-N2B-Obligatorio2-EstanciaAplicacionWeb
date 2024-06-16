@@ -42,11 +42,5 @@ namespace ClassLibrary
 
             return mensaje;
         }
-
-        public override bool Equals(Object obj)
-        {
-            Capataz capataz = obj as Capataz;
-            return capataz is not null && this._nombre.Equals(capataz._nombre) && this._email.Equals(capataz._email);
-        }
     }
 }

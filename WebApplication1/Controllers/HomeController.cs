@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApplication1.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebApplication1.Controllers
 {
@@ -15,6 +16,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
+            if (TempData["Nombre"] is not null) ViewBag.Nombre = TempData["Nombre"];
             return View();
         }
 

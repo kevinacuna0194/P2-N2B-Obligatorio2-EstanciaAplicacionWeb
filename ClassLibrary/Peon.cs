@@ -75,11 +75,5 @@
 
             return mensaje;
         }
-
-        public override bool Equals(object? obj)
-        {
-            Peon peon = obj as Peon;
-            return peon is not null && _nombre.Equals(peon._nombre) && _email.Equals(peon._email);
-        }
     }
 }

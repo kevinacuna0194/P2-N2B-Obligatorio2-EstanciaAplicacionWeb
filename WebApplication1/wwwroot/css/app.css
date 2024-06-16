@@ -32,9 +32,13 @@ body {
     color: var(--primario);
 }
 
-.heading h1 {
-    font-weight: 900;
-}
+    .heading h1 {
+        font-weight: 900;
+    }
+
+    .heading p {
+        color: var(--secundario)
+    }
 
 .seccion {
     min-height: 1000px;

@@ -20,6 +20,15 @@ namespace ClassLibrary
             _fechaIngreso = fechaIngreso;
         }
 
+        /** Propiedades **/
+        public string Email { get { return _email; } }
+
+        public string Password { get { return _password; } }
+
+        public string Nombre { get { return _nombre; } }
+
+        public DateTime FechaIngreso { get {  return _fechaIngreso; } }
+
         // Métodos
         public abstract string TipoEmpleado();
 
@@ -38,6 +47,12 @@ namespace ClassLibrary
             mensaje += $"Fecha de Ingreso: {_fechaIngreso} ➟ ";
 
             return mensaje;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            Empleado empleado = obj as Empleado;
+            return empleado is not null && _nombre.Equals(empleado._nombre) && _email.Equals(empleado._email);
         }
     }
 }
