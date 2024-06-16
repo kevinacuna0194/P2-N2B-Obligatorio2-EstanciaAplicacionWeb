@@ -30,6 +30,7 @@ namespace WebApplication1.Controllers
                 HttpContext.Session.SetString("TipoUsuario", empleado.TipoEmpleado());
 
                 TempData["Nombre"] = empleado.Nombre;
+                TempData["Email"] = empleado.Email;
 
                 return RedirectToAction("Index", "Home");
             }

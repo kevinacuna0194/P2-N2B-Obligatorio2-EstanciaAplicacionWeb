@@ -34,28 +34,36 @@
 
             <ul class="nav flex-column flex-md-row justify-content-end py-4 mb-3">
 
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li> @* Enlace *@
-
-                @* <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </li> *@ @* Enlace *@
-
-                @if (Context.Session.GetString("TipoUsuario") is not null)
+                @if (Context.Session.GetString("TipoUsuario") is null)
                 {
+                    @* <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li> *@ @* Enlace *@
+
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="CerrarSesion">Cerrar Sesión</a>
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li> @* Enlace *@
-                }
-                else
-                {
+
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Login">Login</a>
                     </li> @* Enlace *@
 
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Registrarse">Registrarse</a>
+                    </li> @* Enlace *@
+                }
+
+                @if (Context.Session.GetString("TipoUsuario") == "Peon")
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Empleados" asp-action="Perfil">Perfil</a>
+                    </li> @* Enlace *@
+                }
+
+                @if (Context.Session.GetString("TipoUsuario") is not null)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="CerrarSesion">Cerrar Sesión</a>
                     </li> @* Enlace *@
                 }
 

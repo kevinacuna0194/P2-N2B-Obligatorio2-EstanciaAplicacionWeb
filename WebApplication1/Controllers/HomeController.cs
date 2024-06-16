@@ -17,6 +17,7 @@ namespace WebApplication1.Controllers
         public IActionResult Index()
         {
             if (TempData["Nombre"] is not null) ViewBag.Nombre = TempData["Nombre"];
+            if (TempData["Email"] is not null) ViewBag.Email = TempData["Email"];
             return View();
         }
 

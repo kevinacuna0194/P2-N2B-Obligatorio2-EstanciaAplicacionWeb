@@ -744,17 +744,10 @@ namespace ClassLibrary
 
         public void AltaVacuna(Vacuna vacuna)
         {
-            try
-            {
-                if (vacuna is null) throw new ArgumentNullException("Object Null Sistema\\AltaVacuna(Vacuna vacuna) \n");
-                vacuna.Validar();
-                if (_vacunas.Contains(vacuna)) throw new ArgumentException("Vacuna ya Existe en Sistema\\List<Vacuna> _vacunas \n");
-                _vacunas.Add(vacuna);
-            }
-            catch (Exception ex)
-            {
-                Error(ex.Message);
-            }
+            if (vacuna is null) throw new ArgumentNullException("Object Null Sistema\\AltaVacuna(Vacuna vacuna) \n");
+            vacuna.Validar();
+            if (_vacunas.Contains(vacuna)) throw new ArgumentException("Vacuna ya Existe en Sistema\\List<Vacuna> _vacunas \n");
+            _vacunas.Add(vacuna);
         }
 
         public void PrecargarVacuna()
@@ -848,17 +841,10 @@ namespace ClassLibrary
 
         public void AltaTarea(Tarea tarea)
         {
-            try
-            {
-                if (tarea is null) throw new ArgumentNullException("Object Null AltaTarea() \n");
-                tarea.Validar();
-                if (_tareas.Contains(tarea)) throw new ArgumentException("Tarea ya Existe en _tareas \n");
-                _tareas.Add(tarea);
-            }
-            catch (Exception ex)
-            {
-                Error(ex.Message);
-            }
+            if (tarea is null) throw new ArgumentNullException("Object Null AltaTarea() \n");
+            tarea.Validar();
+            if (_tareas.Contains(tarea)) throw new ArgumentException("Tarea ya Existe en _tareas \n");
+            _tareas.Add(tarea);
         }
 
         public void PrecargarTarea()
