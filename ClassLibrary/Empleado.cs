@@ -20,14 +20,16 @@ namespace ClassLibrary
             _fechaIngreso = fechaIngreso;
         }
 
+        protected Empleado() { }
+
         /** Propiedades **/
-        public string Email { get { return _email; } }
+        public string Email { get { return _email; } set { value = _email; } }
 
-        public string Password { get { return _password; } }
+        public string Password { get { return _password; } set { value = _password; } }
 
-        public string Nombre { get { return _nombre; } }
+        public string Nombre { get { return _nombre; } set { value = _nombre; } }
 
-        public DateTime FechaIngreso { get {  return _fechaIngreso; } }
+        public DateTime FechaIngreso { get {  return _fechaIngreso; } set { value = _fechaIngreso; } }
 
         // Métodos
         public abstract string TipoEmpleado();

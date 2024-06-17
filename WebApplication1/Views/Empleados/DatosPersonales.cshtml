@@ -1,0 +1,80 @@
+﻿@using ClassLibrary;
+@model Peon;
+
+@{
+    ViewData["Title"] = "DatosPersonales";
+}
+
+<section>
+    <h1 class="text-center heading my-5">Datos Personales</h1>
+
+    <div class="container-xl">
+
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-10">
+
+                <table class="table table-striped text-center mb-5">
+
+                    <thead class="fw-bold">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Fecha de Ingreso</th>
+                            <th>¿Es Residente?</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>@Model.Id</td>
+                            <td>@Model.Nombre</td>
+                            <td>@Model.Email</td>
+                            <td>@Model.FechaIngreso.ToString()</td>
+                            <td>@(Model.EsResidente == true ? "Si" : "No")</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div> @* col-md-6 *@
+
+        </div> @* Row *@
+
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-10">
+                
+                <p class="colorSecundario text-center fs-4 my-5">Tareas Asignadas</p>
+
+                <table class="table table-striped text-center mb-5">
+
+                    <thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Fecha Pactada</th>
+                            <th>Completada</th>
+                            <th>Fecha Cierre</th>
+                            <th>Comentario</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach(Tarea tarea in Model.TareasAsignadas)
+                        {
+                            <tr>
+                                <td>@tarea.Descripcion</td>
+                                <td>@tarea.FechaPactada</td>
+                                <td>@(tarea.Completada == true ? "Si" : "No")</td>
+                                <td>@tarea.FechaCierre</td>
+                                <td>@tarea.Comentario</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+</section>

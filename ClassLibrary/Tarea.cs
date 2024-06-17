@@ -28,6 +28,36 @@ namespace ClassLibrary
             get { return _id; }
         }
 
+        public string Descripcion
+        {
+            get { return _descripcion; }
+            set { _descripcion = value; }
+        }
+
+        public DateTime FechaPactada
+        {
+            get { return _fechaPactada; }
+            set { _fechaPactada = value; }
+        }
+
+        public bool Completada
+        {
+            get { return _completada; }
+            set { _completada = value; }
+        }
+
+        public DateTime FechaCierre
+        {
+            get { return _fechaCierre; }
+            set { _fechaCierre = value; }
+        }
+
+        public string Comentario
+        {
+            get { return _comentario; }
+            set { _comentario = value; }
+        }
+
         public bool Validar()
         {
             if (!String.IsNullOrEmpty(_descripcion) && _fechaPactada < DateTime.Today && _fechaCierre < DateTime.Today && !String.IsNullOrEmpty(_comentario)) return true;

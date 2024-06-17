@@ -342,6 +342,33 @@ namespace ClassLibrary
             return tarea;
         }
 
+        public Peon ObtenerPeonPorEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email)) throw new Exception("Email Es Nulo o Vacío");
+
+            Peon peon = null;
+
+            int index = 0;
+            while (index < _empleados.Count && peon is null)
+            {
+                Empleado empleado = _empleados[index];
+
+                if (empleado.TipoEmpleado() == "Peon")
+                {
+                    Peon pawn = (Peon)empleado;
+
+                    if (pawn.Email == email)
+                    {
+                        peon = pawn;
+                    }
+                }
+
+                index++;
+            }
+
+            return peon;
+        }
+
         public Peon ObtenerPeonPorId(int id)
         {
             if (id <= 0) throw new ArgumentException("ID 0. ObtenerPeonPorId(int id)");

@@ -15,16 +15,26 @@
             _residenteEstancia = residenteEstancia;
         }
 
+        /** Constructor Vacío **/
+        public Peon() { }
+
         /** Get; Set; **/
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
+        public bool EsResidente
+        {
+            get { return _residenteEstancia; }
+            set { value = _residenteEstancia; }
+        }
+
         public List<Tarea> TareasAsignadas
         {
             get { return _tareasAsignadas; }
             set { _tareasAsignadas = value; }
-        }
-
-        public int Id
-        {
-            get { return _id; }
         }
 
         /** Métodos Que Agregan o Modifican Información **/
