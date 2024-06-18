@@ -1,0 +1,172 @@
+﻿@using ClassLibrary;
+
+@{
+    ViewData["Title"] = "RegistrarVacunacion";
+}
+
+<section>
+
+    <h1 class="heading text-center my-5">Registrar Vacunación</h1>
+
+    <div class="container-xl">
+
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-12">
+
+                @* Alertas *@
+                @if (ViewBag.Error is not null)
+                {
+                    <p class="alert alert-danger text-center text-uppercase fw-bold mb-4">@ViewBag.Error</p>
+                }
+                else if (ViewBag.Exito is not null)
+                {
+                    <p class="alert alert-success text-center text-uppercase fw-bold mb-4">@ViewBag.Exito</p>
+                }
+
+            </div>
+
+        </div>
+
+        <div class="row d-flex justify-content-center">
+
+            <p class="colorSecundario text-center fs-1 my-5">Ovinos</p>
+
+            <div class="col-md-12">
+
+                <table class="table table-striped text-center mb-5">
+
+                    <thead class="fw-bold">
+                        <tr>
+                            <th>Código Caravana</th>
+                            <th>Sexo</th>
+                            <th>Raza</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Costo Adquisición</th>
+                            <th>Costo Alimentación</th>
+                            <th>Peso Actual</th>
+                            <th>¿Es Híbrido?</th>
+                            <th>Potrero Asignado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (Ovino ovino in Sistema.Instancia.ObtenerOvinos())
+                        {
+                            <tr>
+                                <td>@ovino.CodigoCaravana</td>
+                                <td>@ovino.Sexo</td>
+                                <td>@ovino.Raza</td>
+                                <td>@ovino.FechaNacimiento.ToShortDateString()</td>
+                                <td>@ovino.CostoAdquisicion</td>
+                                <td>@ovino.CostoAlimentacion</td>
+                                <td>@ovino.PesoActual</td>
+                                <td>@(ovino.EsHibrido == true ? "Si" : "No")</td>
+                                <td>@ovino.PotreroAsignado.Descripcion</td>
+                                <td>
+                                    <form action="~/Empleados/Vacunar" method="post" class="d-flex justify-content-between">
+
+                                        <input type="hidden" name="codigoCaravana" value="@ovino.CodigoCaravana" />
+
+                                        <select class="form-select me-2" id="vacuna" name="vacuna">
+
+                                            <option value="">--Seleccione--</option>
+
+                                            @foreach (Vacuna vacuna in Sistema.Instancia.Vacunas)
+                                            {
+                                                <option class value="@vacuna.Id">@vacuna.Nombre</option>
+                                            }
+
+                                        </select>
+
+                                        <input type="submit" class="btn btn-outline-primary" value="Vacunar" />
+
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table> @* Table *@
+
+            </div> @* col-md-12 *@
+
+        </div> @* Row *@
+
+        <div class="row d-flex justify-content-center">
+
+            <p class="colorSecundario text-center fs-1 my-5">Bovinos</p>
+
+            <div class="col-md-12">
+
+                <table class="table table-striped text-center mb-5">
+
+                    <thead class="fw-bold">
+                        <tr>
+                            <th>Código Caravana</th>
+                            <th>Sexo</th>
+                            <th>Raza</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Costo Adquisición</th>
+                            <th>Costo Alimentación</th>
+                            <th>Peso Actual</th>
+                            <th>¿Es Híbrido?</th>
+                            <th>Potrero Asignado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (Bovino bovino in Sistema.Instancia.ObtenerBovinos())
+                        {
+                            <tr>
+                                <td>@bovino.CodigoCaravana</td>
+                                <td>@bovino.Sexo</td>
+                                <td>@bovino.Raza</td>
+                                <td>@bovino.FechaNacimiento.ToShortDateString()</td>
+                                <td>@bovino.CostoAdquisicion</td>
+                                <td>@bovino.CostoAlimentacion</td>
+                                <td>@bovino.PesoActual</td>
+                                <td>@(bovino.EsHibrido == true ? "Si" : "No")</td>
+                                <td>@bovino.PotreroAsignado.Descripcion</td>
+                                <td>
+
+                                    <form action="~/Empleados/Vacunar" method="post" class="d-flex justify-content-between">
+
+                                        <input type="hidden" name="codigoCaravana" value="@bovino.CodigoCaravana" />
+
+                                        <select class="form-select me-2" id="vacuna" name="vacuna">
+
+                                            <option value="">--Seleccione--</option>
+
+                                            @foreach (Vacuna vacuna in Sistema.Instancia.Vacunas)
+                                            {
+                                                <option class value="@vacuna.Id">@vacuna.Nombre</option>
+                                            }
+
+                                        </select>
+
+                                        <input type="submit" class="btn btn-outline-primary" value="Vacunar" />
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table> @* Table *@
+
+            </div> @* col-md-12 *@
+
+        </div> @* Row *@
+
+    </div> @* Container *@
+
+</section>
+

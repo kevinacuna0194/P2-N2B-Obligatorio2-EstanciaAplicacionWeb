@@ -35,6 +35,7 @@ namespace ClassLibrary
         /** Get; Set; **/
         public Potrero PotreroAsignado
         {
+            get { return _potreroAsignado; }
             set { _potreroAsignado = value; }
         }
 
@@ -61,6 +62,16 @@ namespace ClassLibrary
         public decimal CostoAdquisicion
         {
             get { return _costoAdquisicion; }
+        }
+
+        public DateTime FechaNacimiento
+        {
+            get { return _fechaNacimiento; }
+        }
+
+        public string Raza
+        {
+            get { return _raza; }
         }
 
         public Sexo Sexo

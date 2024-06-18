@@ -1,4 +1,5 @@
 ﻿using ClassLibrary.Interface;
+using System.Globalization;
 
 namespace ClassLibrary
 {
@@ -29,6 +30,11 @@ namespace ClassLibrary
         public int Id
         {
             get { return _id; }
+        }
+
+        public string Descripcion
+        {
+            get { return _descripcion; }
         }
 
         public double Hectareas

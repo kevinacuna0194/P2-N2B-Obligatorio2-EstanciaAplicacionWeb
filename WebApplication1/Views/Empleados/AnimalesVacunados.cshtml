@@ -1,0 +1,58 @@
+﻿@using ClassLibrary;
+
+@{
+    ViewData["Title"] = "AnimalesVacunados";
+}
+
+<section>
+
+    <h1 class="heading text-center my-5">
+        Animales Vacunados
+    </h1>
+
+    <div class="container-xl">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-12">
+                @foreach (Animal animal in ViewBag.Animales)
+                {
+                    @if (animal.Vacunaciones.Count > 0)
+                    {
+                        <p class="colorSecundario text-center fs-3 my-5">Tipo: <span class="text-info">@animal.TipoAnimal()</span>. Código Caravana: <span class="text-info">@animal.CodigoCaravana</span>. Total Vacunas: <span class="text-info">@animal.Vacunaciones.Count</span>.</p>
+
+                        <table class="table table-striped text-center mb-5">
+
+                            <thead class="fw-bold">
+                                <tr>
+                                    <th>Nombre Vacuna</th>
+                                    <th>Patógeno</th>
+                                    <th>Fecha</th>
+                                    <th>Vencimiento</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (Vacunacion vacunacion in animal.Vacunaciones)
+                                {
+                                    <tr>
+                                        <td>@vacunacion.TipoVacuna.Nombre</td>
+                                        <td>@vacunacion.TipoVacuna.Patogeno</td>
+                                        <td>@vacunacion.Fecha.ToShortDateString()</td>
+                                        <td>@vacunacion.Vencimiento.ToShortDateString()</td>
+                                        <td>@vacunacion.TipoVacuna.Descripcion</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table> @* Table *@
+                    }
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

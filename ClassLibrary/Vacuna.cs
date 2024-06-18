@@ -30,6 +30,16 @@ namespace ClassLibrary
             get { return _nombre; }
         }
 
+        public string Descripcion
+        {
+            get { return _descripcion; }
+        }
+
+        public string Patogeno
+        {
+            get { return _patogeno; }
+        }
+
         /** Métodos **/
         public bool Validar()
         {
