@@ -55,10 +55,45 @@ namespace WebApplication1.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult AnimalesVacunados()
         {
             ViewBag.Animales = sistema.Animales;
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult TareasNoCompletadas()
+        {
+            ViewBag.Tareas = sistema.TareasNoCompletadas();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CompletarTarea(string idTarea, string comentario)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(comentario) || string.IsNullOrEmpty(idTarea)) throw new Exception("Comentario No Puede Estar Vacío");
+
+                int id = int.Parse(idTarea);
+
+                Tarea tarea = sistema.ObtenerTareaPorId(id);
+
+                tarea.Comentario = comentario;
+
+                tarea.Completada = true;
+
+                ViewBag.Exito = "Tarea Completada Con Éxito. Comentario Modificado.";
+
+                return View("TareasNoCompletadas");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+
+                return View("TareasNoCompletadas");
+            }
         }
     }
 }

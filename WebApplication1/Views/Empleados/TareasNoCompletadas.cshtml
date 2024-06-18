@@ -1,0 +1,81 @@
+﻿@using ClassLibrary;
+
+@{
+    ViewData["Title"] = "TareasNoCompletadas";
+}
+
+<section>
+    <h1 class="text-center heading my-5">Tareas No Completadas</h1>
+
+    <div class="container-xl">
+
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-12">
+
+                @* Alertas *@
+                @if (ViewBag.Error is not null)
+                {
+                    <p class="alert alert-danger text-center text-uppercase fw-bold mb-4">@ViewBag.Error</p>
+                }
+                else if (ViewBag.Exito is not null)
+                {
+                    <p class="alert alert-success text-center text-uppercase fw-bold mb-4">@ViewBag.Exito</p>
+                }
+
+            </div>
+
+        </div>
+
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-12">
+
+                <table class="table table-striped text-center mb-5">
+
+                    <thead class="fw-bold">
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha Pactada</th>
+                            <th>Fecha de Cierre</th>
+                            <th>Descripción</th>
+                            <th>Comentario</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach(Tarea tarea in Sistema.Instancia.Tareas)
+                        {
+                            <tr>
+                                <td>@tarea.Id</td>
+                                <td>@tarea.FechaPactada.ToShortDateString()</td>
+                                <td>@tarea.FechaCierre.ToShortDateString()</td>
+                                <td>@tarea.Descripcion</td>
+                                <td>@tarea.Comentario</td>
+                                <td>
+                                    <form action="~/Empleados/CompletarTarea" method="post" class="d-flex justify-content-between">
+
+                                        <input type="hidden" name="idTarea" value="@tarea.Id" />
+
+                                        <label class="form-label" for="comentario">Comentario:</label>
+
+                                        <input class="form-control mx-2" type="text" name="comentario" />
+
+                                        <input type="submit" class="btn btn-outline-primary" value="Completar" />
+
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table> @* Table *@
+
+            </div> @* col-md-6 *@
+
+        </div> @* Row *@
+
+    </div> @* container-xl *@
+
+</section>

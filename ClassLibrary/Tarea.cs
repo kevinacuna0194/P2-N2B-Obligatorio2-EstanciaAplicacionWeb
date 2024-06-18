@@ -2,7 +2,7 @@
 
 namespace ClassLibrary
 {
-    public class Tarea : IValidar
+    public class Tarea : IValidar, IComparable<Tarea>
     {
         private static int idContador = 1;
         private int _id;
@@ -58,6 +58,7 @@ namespace ClassLibrary
             set { _comentario = value; }
         }
 
+        /** Métodos Globales **/
         public bool Validar()
         {
             if (!String.IsNullOrEmpty(_descripcion) && _fechaPactada < DateTime.Today && _fechaCierre < DateTime.Today && !String.IsNullOrEmpty(_comentario)) return true;
@@ -82,6 +83,11 @@ namespace ClassLibrary
         {
             Tarea tarea = obj as Tarea;
             return (tarea is not null) && this._id == tarea._id;
+        }
+
+        public int CompareTo(Tarea? other)
+        {
+            return this._fechaPactada.CompareTo(other._fechaPactada);
         }
     }
 }

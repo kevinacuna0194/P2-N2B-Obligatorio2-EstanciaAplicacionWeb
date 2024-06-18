@@ -181,6 +181,24 @@ namespace ClassLibrary
 
         #region Métodos para Buscar Información
         /** Métodos para Buscar Información **/
+        public List<Tarea> TareasNoCompletadas()
+        {
+            List<Tarea> tareas = new List<Tarea>();
+
+            foreach(Tarea tarea in _tareas)
+            {
+                if(tarea.Completada == false)
+                {
+                    tareas.Add(tarea);
+                }
+            }
+
+            /** ordenadas por fecha pactada ascendente **/
+            tareas.Sort();
+
+            return tareas;
+        }
+
         public Animal ObtenerAnimalPorCodigoCaravana(string codigoCaravana)
         {
             Animal animal = null;

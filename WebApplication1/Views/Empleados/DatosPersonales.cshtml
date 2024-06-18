@@ -49,36 +49,36 @@
 
                 @if (Model.TareasAsignadas.Count > 0)
                 {
-                    <table class="table table-striped text-center mb-5">
+                        <table class="table table-striped text-center mb-5">
 
-                        <thead>
-                            <tr>
-                                <th>Descripción</th>
-                                <th>Fecha Pactada</th>
-                                <th>Completada</th>
-                                <th>Fecha Cierre</th>
-                                <th>Comentario</th>
-                            </tr>
-                        </thead>
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Fecha Pactada</th>
+                                    <th>Completada</th>
+                                    <th>Fecha Cierre</th>
+                                    <th>Comentario</th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
+                            <tbody>
                             @foreach (Tarea tarea in Model.TareasAsignadas)
                             {
-                                <tr>
-                                    <td>@tarea.Descripcion</td>
-                                    <td>@tarea.FechaPactada.ToShortDateString()</td>
-                                    <td>@(tarea.Completada == true ? "Si" : "No")</td>
-                                    <td>@tarea.FechaCierre.ToShortDateString()</td>
-                                    <td>@tarea.Comentario</td>
-                                </tr>
+                                        <tr>
+                                            <td>@tarea.Descripcion</td>
+                                            <td>@tarea.FechaPactada.ToShortDateString()</td>
+                                            <td>@(tarea.Completada == true ? "Si" : "No")</td>
+                                            <td>@tarea.FechaCierre.ToShortDateString()</td>
+                                            <td>@tarea.Comentario</td>
+                                        </tr>
                             }
-                        </tbody>
+                            </tbody>
 
-                    </table>
+                        </table>
                 }
                 else
                 {
-                    <p class="fs-3 text-center text-danger text-capitalize">No Hay Registros</p>
+                        <p class="fs-3 text-center text-danger text-capitalize">No Hay Registros</p>
                 }
 
             </div>

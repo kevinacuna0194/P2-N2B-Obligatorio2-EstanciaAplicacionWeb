@@ -37,8 +37,8 @@
                 @if (Context.Session.GetString("TipoUsuario") is null)
                 {
                     @* <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li> *@ @* Enlace *@
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </li> *@ @* Enlace *@
 
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -64,13 +64,17 @@
                     </li> @* Enlace *@
 
                     <li class="nav-item">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Listado</a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" asp-controller="Empleados" asp-action="AnimalesVacunados">Animales Vacunados</a>
-                        </li> @* Enlace *@
-                    </ul>
-                </li>
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Listado</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" asp-controller="Empleados" asp-action="AnimalesVacunados">Animales Vacunados</a>
+                            </li> @* Enlace *@
+
+                            <li>
+                                <a class="dropdown-item" asp-controller="Empleados" asp-action="TareasNoCompletadas">Tareas No Completadas</a>
+                            </li> @* Enlace *@
+                        </ul>
+                    </li>
                 }
 
                 @if (Context.Session.GetString("TipoUsuario") is not null)
