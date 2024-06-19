@@ -1,4 +1,5 @@
 ﻿@using ClassLibrary;
+@model Peon;
 
 @{
     ViewData["Title"] = "TareasNoCompletadas";
@@ -16,11 +17,11 @@
                 @* Alertas *@
                 @if (ViewBag.Error is not null)
                 {
-                    <p class="alert alert-danger text-center text-uppercase fw-bold mb-4">@ViewBag.Error</p>
+                    <p class="alert alert-danger text-center text-uppercase fw-bold mb-5">@ViewBag.Error</p>
                 }
                 else if (ViewBag.Exito is not null)
                 {
-                    <p class="alert alert-success text-center text-uppercase fw-bold mb-4">@ViewBag.Exito</p>
+                    <p class="alert alert-success text-center text-uppercase fw-bold mb-5">@ViewBag.Exito</p>
                 }
 
             </div>
@@ -31,46 +32,55 @@
 
             <div class="col-md-12">
 
-                <table class="table table-striped text-center mb-5">
+                @if (@Model.TareasNoCompletadas().Count > 0)
+                {
+                    <table class="table table-striped text-center mb-5">
 
-                    <thead class="fw-bold">
-                        <tr>
-                            <th>ID</th>
-                            <th>Fecha Pactada</th>
-                            <th>Fecha de Cierre</th>
-                            <th>Descripción</th>
-                            <th>Comentario</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach(Tarea tarea in Sistema.Instancia.Tareas)
-                        {
+                        <thead class="fw-bold">
                             <tr>
-                                <td>@tarea.Id</td>
-                                <td>@tarea.FechaPactada.ToShortDateString()</td>
-                                <td>@tarea.FechaCierre.ToShortDateString()</td>
-                                <td>@tarea.Descripcion</td>
-                                <td>@tarea.Comentario</td>
-                                <td>
-                                    <form action="~/Empleados/CompletarTarea" method="post" class="d-flex justify-content-between">
-
-                                        <input type="hidden" name="idTarea" value="@tarea.Id" />
-
-                                        <label class="form-label" for="comentario">Comentario:</label>
-
-                                        <input class="form-control mx-2" type="text" name="comentario" />
-
-                                        <input type="submit" class="btn btn-outline-primary" value="Completar" />
-
-                                    </form>
-                                </td>
+                                <th>ID</th>
+                                <th>Fecha Pactada</th>
+                                <th>Fecha de Cierre</th>
+                                <th>Descripción</th>
+                                <th>Comentario</th>
+                                <th>Acciones</th>
                             </tr>
-                        }
-                    </tbody>
+                        </thead>
 
-                </table> @* Table *@
+                        <tbody>
+                            @foreach (Tarea tarea in @Model.TareasNoCompletadas())
+                            {
+
+                                <tr>
+                                    <td>@tarea.Id</td>
+                                    <td>@tarea.FechaPactada.ToShortDateString()</td>
+                                    <td>@tarea.FechaCierre.ToShortDateString()</td>
+                                    <td>@tarea.Descripcion</td>
+                                    <td>@tarea.Comentario</td>
+                                    <td>
+                                        <form action="~/Empleados/CompletarTarea" method="post" class="d-flex justify-content-between">
+
+                                            <input type="hidden" name="idTarea" value="@tarea.Id" />
+
+                                            <label class="form-label" for="comentario">Comentario:</label>
+                                            <input class="form-control mx-2" type="text" name="comentario" />
+
+                                            <input type="submit" class="btn btn-outline-primary" value="Completar" />
+
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+
+                            }
+                        </tbody>
+
+                    </table> @* Table *@
+                }
+                else
+                {
+                    <p class="fs-3 text-center text-danger text-capitalize">No Hay Registros</p>
+                }
 
             </div> @* col-md-6 *@
 

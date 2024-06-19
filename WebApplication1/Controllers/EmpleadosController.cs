@@ -65,8 +65,8 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public IActionResult TareasNoCompletadas()
         {
-            ViewBag.Tareas = sistema.TareasNoCompletadas();
-            return View();
+            Peon peon = sistema.ObtenerPeonPorEmail(HttpContext.Session.GetString("Email"));
+            return View(peon);
         }
 
         [HttpPost]
@@ -78,7 +78,9 @@ namespace WebApplication1.Controllers
 
                 int id = int.Parse(idTarea);
 
-                Tarea tarea = sistema.ObtenerTareaPorId(id);
+                Peon peon = sistema.ObtenerPeonPorEmail(HttpContext.Session.GetString("Email"));
+
+                Tarea tarea = peon.ObtenerTareaPorId(id);
 
                 tarea.Comentario = comentario;
 
@@ -86,7 +88,7 @@ namespace WebApplication1.Controllers
 
                 ViewBag.Exito = "Tarea Completada Con Éxito. Comentario Modificado.";
 
-                return View("TareasNoCompletadas");
+                return View("TareasNoCompletadas", peon);
             }
             catch (Exception ex)
             {

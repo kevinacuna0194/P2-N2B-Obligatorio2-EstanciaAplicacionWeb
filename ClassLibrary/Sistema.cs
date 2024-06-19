@@ -1,4 +1,6 @@
 ﻿using ClassLibrary.Enum;
+using System.Globalization;
+using System.Net.Http;
 
 namespace ClassLibrary
 {
@@ -19,7 +21,7 @@ namespace ClassLibrary
         {
             PrecargarEmpleado();
             PrecargarAnimal();
-            PrecargarTarea();
+            //PrecargarTarea();
             PrecargarVacuna();
             PrecargarPotrero();
             VacunarBovino();
@@ -43,11 +45,6 @@ namespace ClassLibrary
         public List<Animal> Animales
         {
             get { return _animales; }
-        }
-
-        public List<Tarea> Tareas
-        {
-            get { return _tareas; }
         }
 
         public List<Vacuna> Vacunas
@@ -181,32 +178,15 @@ namespace ClassLibrary
 
         #region Métodos para Buscar Información
         /** Métodos para Buscar Información **/
-        public List<Tarea> TareasNoCompletadas()
-        {
-            List<Tarea> tareas = new List<Tarea>();
-
-            foreach(Tarea tarea in _tareas)
-            {
-                if(tarea.Completada == false)
-                {
-                    tareas.Add(tarea);
-                }
-            }
-
-            /** ordenadas por fecha pactada ascendente **/
-            tareas.Sort();
-
-            return tareas;
-        }
 
         public Animal ObtenerAnimalPorCodigoCaravana(string codigoCaravana)
         {
             Animal animal = null;
             int index = 0;
 
-            while(index < _animales.Count && animal is null)
+            while (index < _animales.Count && animal is null)
             {
-                if(_animales[index].CodigoCaravana == codigoCaravana)
+                if (_animales[index].CodigoCaravana == codigoCaravana)
                 {
                     animal = _animales[index];
                 }
@@ -236,10 +216,10 @@ namespace ClassLibrary
         public List<Bovino> ObtenerBovinos()
         {
             List<Bovino> bovinos = new List<Bovino>();
-            
-            foreach(Animal animal in _animales)
+
+            foreach (Animal animal in _animales)
             {
-                if(animal.TipoAnimal() == "Bovino")
+                if (animal.TipoAnimal() == "Bovino")
                 {
                     Bovino bovino = (Bovino)animal;
                     bovinos.Add(bovino);
@@ -410,23 +390,6 @@ namespace ClassLibrary
             return bovino;
         }
 
-        public Tarea ObtenerTareaPorId(int id)
-        {
-            if (id <= 0) throw new ArgumentException("ID 0. ObtenerTareaPorId(int id)");
-
-            Tarea tarea = null;
-
-            int index = 0;
-            while (index < _tareas.Count && tarea is null)
-            {
-                if (_tareas[index].Id == id) tarea = _tareas[index];
-
-                index++;
-            }
-
-            return tarea;
-        }
-
         public Peon ObtenerPeonPorEmail(string email)
         {
             if (string.IsNullOrEmpty(email)) throw new Exception("Email Es Nulo o Vacío");
@@ -504,21 +467,35 @@ namespace ClassLibrary
                     throw new InvalidOperationException("Object Null. Sistema.cs\\AsignarTareaAlPeon()");
                 }
 
-                Tarea tarea1 = ObtenerTareaPorId(1);
-                Tarea tarea2 = ObtenerTareaPorId(2);
-                Tarea tarea3 = ObtenerTareaPorId(3);
-                Tarea tarea4 = ObtenerTareaPorId(4);
-                Tarea tarea5 = ObtenerTareaPorId(5);
-                Tarea tarea6 = ObtenerTareaPorId(6);
-                Tarea tarea7 = ObtenerTareaPorId(7);
-                Tarea tarea8 = ObtenerTareaPorId(8);
-                Tarea tarea9 = ObtenerTareaPorId(9);
-                Tarea tarea10 = ObtenerTareaPorId(10);
-                Tarea tarea11 = ObtenerTareaPorId(11);
-                Tarea tarea12 = ObtenerTareaPorId(12);
-                Tarea tarea13 = ObtenerTareaPorId(13);
-                Tarea tarea14 = ObtenerTareaPorId(14);
-                Tarea tarea15 = ObtenerTareaPorId(15);
+                Tarea tarea1 = new Tarea("Preparar terreno para siembra", DateTime.Today.AddDays(1), false, DateTime.Today.AddDays(2), "Se necesita arar y fertilizar el terreno");
+
+                Tarea tarea2 = new Tarea("Sembrar cultivo de maíz", DateTime.Today.AddDays(3), false, DateTime.Today.AddDays(4), "Sembrar el maíz en las parcelas asignadas");
+
+                Tarea tarea3 = new Tarea("Regar cultivos", DateTime.Today.AddDays(5), false, DateTime.Today.AddDays(6), "Asegurarse de mantener una hidratación adecuada");
+
+                Tarea tarea4 = new Tarea("Fertilizar cultivos", DateTime.Today.AddDays(7), false, DateTime.Today.AddDays(8), "Aplicar fertilizantes según las necesidades del suelo");
+
+                Tarea tarea5 = new Tarea("Control de plagas", DateTime.Today.AddDays(9), false, DateTime.Today.AddDays(10), "Monitorear y aplicar tratamientos contra plagas");
+
+                Tarea tarea6 = new Tarea("Podar árboles frutales", DateTime.Today.AddDays(11), false, DateTime.Today.AddDays(12), "Realizar poda de forma adecuada para promover el crecimiento");
+
+                Tarea tarea7 = new Tarea("Cosechar cultivos", DateTime.Today.AddDays(13), false, DateTime.Today.AddDays(14), "Recolectar los cultivos en el momento óptimo");
+
+                Tarea tarea8 = new Tarea("Inspección de cercas", DateTime.Today.AddDays(15), false, DateTime.Today.AddDays(16), "Revisar la integridad de las cercas del campo");
+
+                Tarea tarea9 = new Tarea("Reparación de maquinaria agrícola", DateTime.Today.AddDays(17), false, DateTime.Today.AddDays(18), "Realizar mantenimiento y reparaciones según sea necesario");
+
+                Tarea tarea10 = new Tarea("Control de malezas", DateTime.Today.AddDays(19), false, DateTime.Today.AddDays(20), "Eliminar malezas que puedan competir con los cultivos");
+
+                Tarea tarea11 = new Tarea("Fertilizar terrenos vacíos", DateTime.Today.AddDays(21), false, DateTime.Today.AddDays(22), "Aplicar fertilizantes en áreas sin cultivos");
+
+                Tarea tarea12 = new Tarea("Revisión de sistemas de riego", DateTime.Today.AddDays(23), false, DateTime.Today.AddDays(24), "Asegurarse de que los sistemas de riego estén funcionando correctamente");
+
+                Tarea tarea13 = new Tarea("Control de humedad en suelo", DateTime.Today.AddDays(25), false, DateTime.Today.AddDays(26), "Monitorear niveles de humedad y ajustar riego según sea necesario");
+
+                Tarea tarea14 = new Tarea("Cercar área de pastoreo", DateTime.Today.AddDays(27), false, DateTime.Today.AddDays(28), "Instalar cercas temporales para el pastoreo del ganado");
+
+                Tarea tarea15 = new Tarea("Preparar suelos para próximas siembras", DateTime.Today.AddDays(29), false, DateTime.Today.AddDays(30), "Arar y acondicionar suelos para futuras siembras");
 
                 if (tarea1 is null || tarea2 is null || tarea3 is null || tarea4 is null || tarea5 is null || tarea6 is null || tarea7 is null || tarea8 is null || tarea9 is null || tarea10 is null || tarea11 is null || tarea12 is null || tarea13 is null || tarea14 is null || tarea15 is null)
                 {
@@ -557,9 +534,7 @@ namespace ClassLibrary
             }
             catch (Exception ex)
             {
-                Console.WriteLine();
-                Error($"{ex.Message} \n");
-                return;
+                string error = ex.Message.ToString();
             }
         }
 
@@ -959,6 +934,7 @@ namespace ClassLibrary
             _tareas.Add(tarea);
         }
 
+        /*
         public void PrecargarTarea()
         {
             AltaTarea(new Tarea("Preparar terreno para siembra", DateTime.Today.AddDays(1), false, DateTime.Today.AddDays(2), "Se necesita arar y fertilizar el terreno"));
@@ -977,6 +953,7 @@ namespace ClassLibrary
             AltaTarea(new Tarea("Cercar área de pastoreo", DateTime.Today.AddDays(27), false, DateTime.Today.AddDays(28), "Instalar cercas temporales para el pastoreo del ganado"));
             AltaTarea(new Tarea("Preparar suelos para próximas siembras", DateTime.Today.AddDays(29), false, DateTime.Today.AddDays(30), "Arar y acondicionar suelos para futuras siembras"));
         }
+        */
 
         public void AltaEmpleado(Empleado empleado)
         {
